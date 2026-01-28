@@ -1,0 +1,15 @@
+services:
+  mercure:
+    image: dunglas/mercure:latest
+    restart: unless-stopped
+    environment:
+      # Disable HTTPS for local testing
+      SERVER_NAME: ':80'
+      MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+      # Allow anonymous subscribers for testing
+      MERCURE_EXTRA_DIRECTIVES: |
+        anonymous
+        cors_origins *
+    ports:
+      - "3000:80"
