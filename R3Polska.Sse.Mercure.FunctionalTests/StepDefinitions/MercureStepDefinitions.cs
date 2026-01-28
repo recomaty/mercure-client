@@ -18,6 +18,7 @@ public class MercureStepDefinitions
     #region Given Steps
 
     [Given(@"I am subscribed to the ""(.*)"" topic")]
+    [When(@"I am subscribed to the ""(.*)"" topic")]
     public void GivenIAmSubscribedToTheTopic(string topic)
     {
         _context.Subscriber = new MercureSubscriber(_context.Fixture!.MercureHost, topic);

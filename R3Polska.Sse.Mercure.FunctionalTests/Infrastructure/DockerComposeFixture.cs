@@ -57,6 +57,20 @@ public class DockerComposeFixture : IAsyncLifetime
         await RunDockerComposeAsync("down", "-v", "--remove-orphans");
     }
 
+    public async Task StopMercureAsync()
+    {
+        await RunDockerComposeAsync("stop", "mercure");
+        Console.WriteLine("[Docker] Mercure container stopped");
+    }
+
+    public async Task StartMercureAsync()
+    {
+        await RunDockerComposeAsync("start", "mercure");
+        Console.WriteLine("[Docker] Mercure container starting...");
+        await WaitForMercureAsync();
+        Console.WriteLine("[Docker] Mercure container ready");
+    }
+
     private string GenerateJwtToken()
     {
         // Simple JWT token for testing with the secret key from docker-compose

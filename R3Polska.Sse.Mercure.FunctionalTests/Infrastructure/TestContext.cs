@@ -13,4 +13,9 @@ public class TestContext
     public int EventCountBeforePublish { get; set; }
     public int EventCountBeforeFirstPublish { get; set; }
     public bool HasRecordedFirstPublish { get; set; }
+    public int RetryCount { get; set; }
+    public TimeSpan RetryInterval { get; set; }
+    public bool PublishSucceeded { get; set; }
+    public DateTime? PublishStartTime { get; set; }
+    public DateTime? PublishEndTime { get; set; }
 }
