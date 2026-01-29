@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using R3Polska.Sse.Mercure.FunctionalTests.Infrastructure;
@@ -126,11 +125,11 @@ public class ResiliencyStepDefinitions
             var timeout = TimeSpan.FromSeconds(seconds);
             var completedInTime = await Task.WhenAny(_backgroundPublishTask, Task.Delay(timeout)) == _backgroundPublishTask;
 
-            completedInTime.Should().BeTrue($"Publish operation should complete within {seconds} seconds");
+            Assert.True(completedInTime, $"Publish operation should complete within {seconds} seconds");
         }
 
-        _context.PublishSucceeded.Should().BeTrue("Publish operation should succeed");
-        _publishException.Should().BeNull("No exception should be thrown");
+        Assert.True(_context.PublishSucceeded, "Publish operation should succeed");
+        Assert.Null(_publishException);
 
         // Log timing info
         if (_context.PublishStartTime.HasValue && _context.PublishEndTime.HasValue)
