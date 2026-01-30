@@ -1,0 +1,9 @@
+﻿using System.Text.Json.Serialization;
+
+namespace R3Polska.Sse.Mercure.Message;
+
+public class InternetConnectivityPayload(string state) : IMercureMessagePayload
+{
+    [JsonPropertyName("state")]
+    public string State { get; } = $"inet_connection_{state}";
+}
