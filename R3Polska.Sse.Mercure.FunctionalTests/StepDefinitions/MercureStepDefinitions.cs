@@ -1,6 +1,7 @@
 using R3Polska.Sse.Mercure.FunctionalTests.Infrastructure;
 using R3Polska.Sse.Mercure.Message;
 using Reqnroll;
+using Shouldly;
 
 namespace R3Polska.Sse.Mercure.FunctionalTests.StepDefinitions;
 
@@ -368,44 +369,44 @@ public class MercureStepDefinitions
             await Task.Delay(100);
         }
 
-        Assert.NotNull(_context.LastReceivedEvent);
+        _context.LastReceivedEvent.ShouldNotBeNull();
     }
 
     [Then(@"the received message should have state ""(.*)""")]
     public void ThenTheReceivedMessageShouldHaveState(string expectedState)
     {
         var json = _context.LastReceivedEvent!.GetDataAsJson();
-        Assert.NotNull(json);
+        json.ShouldNotBeNull();
 
-        var state = json!.RootElement.GetProperty("state").GetString();
-        Assert.Equal(expectedState, state);
+        var state = json.RootElement.GetProperty("state").GetString();
+        state.ShouldBe(expectedState);
     }
 
     [Then(@"the received message should have EAN ""(.*)""")]
     public void ThenTheReceivedMessageShouldHaveEan(string expectedEan)
     {
         var json = _context.LastReceivedEvent!.GetDataAsJson();
-        Assert.NotNull(json);
+        json.ShouldNotBeNull();
 
-        var ean = json!.RootElement.GetProperty("ean").GetString();
-        Assert.Equal(expectedEan, ean);
+        var ean = json.RootElement.GetProperty("ean").GetString();
+        ean.ShouldBe(expectedEan);
     }
 
     [Then(@"the received message should have message ""(.*)""")]
     public void ThenTheReceivedMessageShouldHaveMessage(string expectedMessage)
     {
         var json = _context.LastReceivedEvent!.GetDataAsJson();
-        Assert.NotNull(json);
+        json.ShouldNotBeNull();
 
-        var message = json!.RootElement.GetProperty("message").GetString();
-        Assert.Equal(expectedMessage, message);
+        var message = json.RootElement.GetProperty("message").GetString();
+        message.ShouldBe(expectedMessage);
     }
 
     [Then(@"the message should be received on the ""(.*)"" topic")]
     public void ThenTheMessageShouldBeReceivedOnTheTopic(string topic)
     {
         // If we received the message, it means we're subscribed to the correct topic
-        Assert.NotNull(_context.LastReceivedEvent);
+        _context.LastReceivedEvent.ShouldNotBeNull();
     }
 
     [Then(@"the subscriber should receive (\d+) messages within (\d+) seconds")]
@@ -430,14 +431,14 @@ public class MercureStepDefinitions
         }
 
         var actualCount = _context.Subscriber!.ReceivedEvents.Count - startCount;
-        Assert.Equal(count, actualCount);
+        actualCount.ShouldBe(count);
     }
 
     [Then(@"the messages should be received in order")]
     public void ThenTheMessagesShouldBeReceivedInOrder()
     {
         // Messages are stored in order of receipt, so we just verify we have them
-        Assert.NotEmpty(_context.ReceivedEvents);
+        _context.ReceivedEvents.ShouldNotBeEmpty();
     }
 
     #endregion

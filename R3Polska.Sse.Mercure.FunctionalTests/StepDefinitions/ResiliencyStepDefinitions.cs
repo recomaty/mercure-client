@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using R3Polska.Sse.Mercure.FunctionalTests.Infrastructure;
 using R3Polska.Sse.Mercure.Message;
 using Reqnroll;
+using Shouldly;
 
 namespace R3Polska.Sse.Mercure.FunctionalTests.StepDefinitions;
 
@@ -125,11 +126,11 @@ public class ResiliencyStepDefinitions
             var timeout = TimeSpan.FromSeconds(seconds);
             var completedInTime = await Task.WhenAny(_backgroundPublishTask, Task.Delay(timeout)) == _backgroundPublishTask;
 
-            Assert.True(completedInTime, $"Publish operation should complete within {seconds} seconds");
+            completedInTime.ShouldBeTrue($"Publish operation should complete within {seconds} seconds");
         }
 
-        Assert.True(_context.PublishSucceeded, "Publish operation should succeed");
-        Assert.Null(_publishException);
+        _context.PublishSucceeded.ShouldBeTrue("Publish operation should succeed");
+        _publishException.ShouldBeNull();
 
         // Log timing info
         if (_context.PublishStartTime.HasValue && _context.PublishEndTime.HasValue)

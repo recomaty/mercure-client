@@ -1,3 +1,5 @@
+using Shouldly;
+
 namespace R3Polska.Sse.Mercure.Tests;
 
 public class MercurePublisherOptionsTests
@@ -10,7 +12,7 @@ public class MercurePublisherOptionsTests
             Host = "http://localhost:3000",
             Token = "test-token"
         };
-        Assert.Equal("http://localhost:3000", options.Host);
+        options.Host.ShouldBe("http://localhost:3000");
     }
 
     [Fact]
@@ -21,7 +23,7 @@ public class MercurePublisherOptionsTests
             Host = "http://localhost:3000",
             Token = "my-secret-token"
         };
-        Assert.Equal("my-secret-token", options.Token);
+        options.Token.ShouldBe("my-secret-token");
     }
 
     [Fact]
@@ -33,7 +35,7 @@ public class MercurePublisherOptionsTests
             Token = "token"
         };
         options.Host = "http://mercure:3000";
-        Assert.Equal("http://mercure:3000", options.Host);
+        options.Host.ShouldBe("http://mercure:3000");
     }
 
     [Fact]
@@ -45,7 +47,7 @@ public class MercurePublisherOptionsTests
             Token = "old-token"
         };
         options.Token = "new-token";
-        Assert.Equal("new-token", options.Token);
+        options.Token.ShouldBe("new-token");
     }
 
     [Theory]
@@ -60,7 +62,7 @@ public class MercurePublisherOptionsTests
             Host = host,
             Token = "token"
         };
-        Assert.Equal(host, options.Host);
+        options.Host.ShouldBe(host);
     }
 
     [Theory]
@@ -74,7 +76,7 @@ public class MercurePublisherOptionsTests
             Host = "http://localhost:3000",
             Token = token
         };
-        Assert.Equal(token, options.Token);
+        options.Token.ShouldBe(token);
     }
 
     [Fact]
@@ -86,7 +88,7 @@ public class MercurePublisherOptionsTests
             Token = "bearer-token-123"
         };
 
-        Assert.Equal("http://mercure:3000", options.Host);
-        Assert.Equal("bearer-token-123", options.Token);
+        options.Host.ShouldBe("http://mercure:3000");
+        options.Token.ShouldBe("bearer-token-123");
     }
 }

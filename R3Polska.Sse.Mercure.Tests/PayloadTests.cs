@@ -1,5 +1,6 @@
 using System.Text.Json;
 using R3Polska.Sse.Mercure.Message;
+using Shouldly;
 
 namespace R3Polska.Sse.Mercure.Tests;
 
@@ -11,7 +12,7 @@ public class PayloadTests
     public void ReadyPayload_State_ShouldBeReady()
     {
         var payload = new ReadyPayload();
-        Assert.Equal("ready", payload.State);
+        payload.State.ShouldBe("ready");
     }
 
     [Fact]
@@ -19,14 +20,14 @@ public class PayloadTests
     {
         var payload = new ReadyPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"ready\"", json);
+        json.ShouldContain("\"state\":\"ready\"");
     }
 
     [Fact]
     public void BagClosing_State_ShouldBeBagClosing()
     {
         var payload = new BagClosing();
-        Assert.Equal("bag_closing", payload.State);
+        payload.State.ShouldBe("bag_closing");
     }
 
     [Fact]
@@ -34,14 +35,14 @@ public class PayloadTests
     {
         var payload = new BagClosing();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"bag_closing\"", json);
+        json.ShouldContain("\"state\":\"bag_closing\"");
     }
 
     [Fact]
     public void BagRequiredPayload_State_ShouldBeBagRequired()
     {
         var payload = new BagRequiredPayload();
-        Assert.Equal("bag_required", payload.State);
+        payload.State.ShouldBe("bag_required");
     }
 
     [Fact]
@@ -49,14 +50,14 @@ public class PayloadTests
     {
         var payload = new BagRequiredPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"bag_required\"", json);
+        json.ShouldContain("\"state\":\"bag_required\"");
     }
 
     [Fact]
     public void BarcodeDataInvalidPayload_State_ShouldBeBarcodeDataInvalid()
     {
         var payload = new BarcodeDataInvalidPayload();
-        Assert.Equal("barcode_data_invalid", payload.State);
+        payload.State.ShouldBe("barcode_data_invalid");
     }
 
     [Fact]
@@ -64,14 +65,14 @@ public class PayloadTests
     {
         var payload = new BarcodeDataInvalidPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"barcode_data_invalid\"", json);
+        json.ShouldContain("\"state\":\"barcode_data_invalid\"");
     }
 
     [Fact]
     public void CancelDropPayload_State_ShouldBeCancelDrop()
     {
         var payload = new CancelDropPayload();
-        Assert.Equal("cancel_drop", payload.State);
+        payload.State.ShouldBe("cancel_drop");
     }
 
     [Fact]
@@ -79,14 +80,14 @@ public class PayloadTests
     {
         var payload = new CancelDropPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"cancel_drop\"", json);
+        json.ShouldContain("\"state\":\"cancel_drop\"");
     }
 
     [Fact]
     public void DebouncingPayload_State_ShouldBeDebouncing()
     {
         var payload = new DebouncingPayload();
-        Assert.Equal("debouncing", payload.State);
+        payload.State.ShouldBe("debouncing");
     }
 
     [Fact]
@@ -94,14 +95,14 @@ public class PayloadTests
     {
         var payload = new DebouncingPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"debouncing\"", json);
+        json.ShouldContain("\"state\":\"debouncing\"");
     }
 
     [Fact]
     public void FinishedPayload_State_ShouldBeFinished()
     {
         var payload = new FinishedPayload();
-        Assert.Equal("finished", payload.State);
+        payload.State.ShouldBe("finished");
     }
 
     [Fact]
@@ -109,14 +110,14 @@ public class PayloadTests
     {
         var payload = new FinishedPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"finished\"", json);
+        json.ShouldContain("\"state\":\"finished\"");
     }
 
     [Fact]
     public void LogoutPayload_State_ShouldBeSignedOut()
     {
         var payload = new LogoutPayload();
-        Assert.Equal("signed_out", payload.State);
+        payload.State.ShouldBe("signed_out");
     }
 
     [Fact]
@@ -124,14 +125,14 @@ public class PayloadTests
     {
         var payload = new LogoutPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"signed_out\"", json);
+        json.ShouldContain("\"state\":\"signed_out\"");
     }
 
     [Fact]
     public void ScanLimitPayload_State_ShouldBeScanLimit()
     {
         var payload = new ScanLimitPayload();
-        Assert.Equal("scan_limit", payload.State);
+        payload.State.ShouldBe("scan_limit");
     }
 
     [Fact]
@@ -139,14 +140,14 @@ public class PayloadTests
     {
         var payload = new ScanLimitPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"scan_limit\"", json);
+        json.ShouldContain("\"state\":\"scan_limit\"");
     }
 
     [Fact]
     public void ServiceEnterPayload_State_ShouldBeServiceEnter()
     {
         var payload = new ServiceEnterPayload();
-        Assert.Equal("service_enter", payload.State);
+        payload.State.ShouldBe("service_enter");
     }
 
     [Fact]
@@ -154,14 +155,14 @@ public class PayloadTests
     {
         var payload = new ServiceEnterPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"service_enter\"", json);
+        json.ShouldContain("\"state\":\"service_enter\"");
     }
 
     [Fact]
     public void ServiceExitPayload_State_ShouldBeServiceExit()
     {
         var payload = new ServiceExitPayload();
-        Assert.Equal("service_exit", payload.State);
+        payload.State.ShouldBe("service_exit");
     }
 
     [Fact]
@@ -169,14 +170,14 @@ public class PayloadTests
     {
         var payload = new ServiceExitPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"service_exit\"", json);
+        json.ShouldContain("\"state\":\"service_exit\"");
     }
 
     [Fact]
     public void SessionExpiredPayload_State_ShouldBeSessionExpired()
     {
         var payload = new SessionExpiredPayload();
-        Assert.Equal("session_expired", payload.State);
+        payload.State.ShouldBe("session_expired");
     }
 
     [Fact]
@@ -184,14 +185,14 @@ public class PayloadTests
     {
         var payload = new SessionExpiredPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"session_expired\"", json);
+        json.ShouldContain("\"state\":\"session_expired\"");
     }
 
     [Fact]
     public void SignedInPayload_State_ShouldBeSignedIn()
     {
         var payload = new SignedInPayload();
-        Assert.Equal("signed_in", payload.State);
+        payload.State.ShouldBe("signed_in");
     }
 
     [Fact]
@@ -199,14 +200,14 @@ public class PayloadTests
     {
         var payload = new SignedInPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"signed_in\"", json);
+        json.ShouldContain("\"state\":\"signed_in\"");
     }
 
     [Fact]
     public void WaitForBag_State_ShouldBeWaitForBag()
     {
         var payload = new WaitForBag();
-        Assert.Equal("wait_for_bag", payload.State);
+        payload.State.ShouldBe("wait_for_bag");
     }
 
     [Fact]
@@ -214,7 +215,7 @@ public class PayloadTests
     {
         var payload = new WaitForBag();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"wait_for_bag\"", json);
+        json.ShouldContain("\"state\":\"wait_for_bag\"");
     }
 
     #endregion
@@ -225,14 +226,14 @@ public class PayloadTests
     public void FinishingPayload_State_ShouldBeFinishing()
     {
         var payload = new FinishingPayload();
-        Assert.Equal("finishing", payload.State);
+        payload.State.ShouldBe("finishing");
     }
 
     [Fact]
     public void FinishingPayload_Message_ShouldBePolishText()
     {
         var payload = new FinishingPayload();
-        Assert.Equal("Trwa kończenie.", payload.Message);
+        payload.Message.ShouldBe("Trwa kończenie.");
     }
 
     [Fact]
@@ -240,8 +241,8 @@ public class PayloadTests
     {
         var payload = new FinishingPayload();
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"finishing\"", json);
-        Assert.Contains("\"message\":", json);
+        json.ShouldContain("\"state\":\"finishing\"");
+        json.ShouldContain("\"message\":");
     }
 
     #endregion
@@ -252,7 +253,7 @@ public class PayloadTests
     public void AwaitsDropPayload_State_ShouldBeAwaitsDrop()
     {
         var payload = new AwaitsDropPayload("1234567890123");
-        Assert.Equal("awaits_drop", payload.State);
+        payload.State.ShouldBe("awaits_drop");
     }
 
     [Fact]
@@ -260,7 +261,7 @@ public class PayloadTests
     {
         var ean = "1234567890123";
         var payload = new AwaitsDropPayload(ean);
-        Assert.Equal(ean, payload.Ean);
+        payload.Ean.ShouldBe(ean);
     }
 
     [Fact]
@@ -268,8 +269,8 @@ public class PayloadTests
     {
         var payload = new AwaitsDropPayload("1234567890123");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"awaits_drop\"", json);
-        Assert.Contains("\"ean\":\"1234567890123\"", json);
+        json.ShouldContain("\"state\":\"awaits_drop\"");
+        json.ShouldContain("\"ean\":\"1234567890123\"");
     }
 
     [Theory]
@@ -279,14 +280,14 @@ public class PayloadTests
     public void AwaitsDropPayload_ShouldAcceptVariousEanFormats(string ean)
     {
         var payload = new AwaitsDropPayload(ean);
-        Assert.Equal(ean, payload.Ean);
+        payload.Ean.ShouldBe(ean);
     }
 
     [Fact]
     public void ProductDetectionPayload_State_ShouldBeProductDetection()
     {
         var payload = new ProductDetectionPayload("1234567890123");
-        Assert.Equal("product_detection", payload.State);
+        payload.State.ShouldBe("product_detection");
     }
 
     [Fact]
@@ -294,7 +295,7 @@ public class PayloadTests
     {
         var ean = "9876543210987";
         var payload = new ProductDetectionPayload(ean);
-        Assert.Equal(ean, payload.Ean);
+        payload.Ean.ShouldBe(ean);
     }
 
     [Fact]
@@ -302,15 +303,15 @@ public class PayloadTests
     {
         var payload = new ProductDetectionPayload("9876543210987");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"product_detection\"", json);
-        Assert.Contains("\"ean\":\"9876543210987\"", json);
+        json.ShouldContain("\"state\":\"product_detection\"");
+        json.ShouldContain("\"ean\":\"9876543210987\"");
     }
 
     [Fact]
     public void ProductNotAllowedPayload_State_ShouldBeProductNotAllowed()
     {
         var payload = new ProductNotAllowedPayload("1234567890123");
-        Assert.Equal("product_not_allowed", payload.State);
+        payload.State.ShouldBe("product_not_allowed");
     }
 
     [Fact]
@@ -318,7 +319,7 @@ public class PayloadTests
     {
         var ean = "5555555555555";
         var payload = new ProductNotAllowedPayload(ean);
-        Assert.Equal(ean, payload.Ean);
+        payload.Ean.ShouldBe(ean);
     }
 
     [Fact]
@@ -326,15 +327,15 @@ public class PayloadTests
     {
         var payload = new ProductNotAllowedPayload("5555555555555");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"product_not_allowed\"", json);
-        Assert.Contains("\"ean\":\"5555555555555\"", json);
+        json.ShouldContain("\"state\":\"product_not_allowed\"");
+        json.ShouldContain("\"ean\":\"5555555555555\"");
     }
 
     [Fact]
     public void UnknownProductPayload_State_ShouldBeProductUnknown()
     {
         var payload = new UnknownProductPayload("1234567890123");
-        Assert.Equal("product_unknown", payload.State);
+        payload.State.ShouldBe("product_unknown");
     }
 
     [Fact]
@@ -342,7 +343,7 @@ public class PayloadTests
     {
         var ean = "0000000000000";
         var payload = new UnknownProductPayload(ean);
-        Assert.Equal(ean, payload.Ean);
+        payload.Ean.ShouldBe(ean);
     }
 
     [Fact]
@@ -350,8 +351,8 @@ public class PayloadTests
     {
         var payload = new UnknownProductPayload("0000000000000");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"product_unknown\"", json);
-        Assert.Contains("\"ean\":\"0000000000000\"", json);
+        json.ShouldContain("\"state\":\"product_unknown\"");
+        json.ShouldContain("\"ean\":\"0000000000000\"");
     }
 
     #endregion
@@ -365,7 +366,7 @@ public class PayloadTests
     public void InternetConnectivityPayload_State_ShouldContainDynamicState(string state, string expected)
     {
         var payload = new InternetConnectivityPayload(state);
-        Assert.Equal(expected, payload.State);
+        payload.State.ShouldBe(expected);
     }
 
     [Fact]
@@ -373,7 +374,7 @@ public class PayloadTests
     {
         var payload = new InternetConnectivityPayload("online");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"inet_connection_online\"", json);
+        json.ShouldContain("\"state\":\"inet_connection_online\"");
     }
 
     [Theory]
@@ -383,7 +384,7 @@ public class PayloadTests
     public void PrinterPaperStatePayload_State_ShouldContainDynamicState(string paperState, string expected)
     {
         var payload = new PrinterPaperStatePayload(paperState);
-        Assert.Equal(expected, payload.State);
+        payload.State.ShouldBe(expected);
     }
 
     [Fact]
@@ -391,7 +392,7 @@ public class PayloadTests
     {
         var payload = new PrinterPaperStatePayload("low");
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"paper_state_low\"", json);
+        json.ShouldContain("\"state\":\"paper_state_low\"");
     }
 
     [Theory]
@@ -402,25 +403,25 @@ public class PayloadTests
     public void PrinterStatusPayload_State_ShouldContainDynamicState(string printerState, string expected)
     {
         var payload = new PrinterStatusPayload(printerState);
-        Assert.Equal(expected, payload.State);
+        payload.State.ShouldBe(expected);
     }
 
     [Fact]
     public void PrinterStatusPayload_SingleParam_ShouldHaveNullOptionalFields()
     {
         var payload = new PrinterStatusPayload("ready");
-        Assert.Null(payload.PrintJobId);
-        Assert.Null(payload.WaitTimeInSeconds);
-        Assert.Null(payload.PaperStatus);
+        payload.PrintJobId.ShouldBeNull();
+        payload.WaitTimeInSeconds.ShouldBeNull();
+        payload.PaperStatus.ShouldBeNull();
     }
 
     [Fact]
     public void PrinterStatusPayload_ThreeParams_ShouldSetJobIdAndWaitTime()
     {
         var payload = new PrinterStatusPayload("printing", "job123", 30);
-        Assert.Equal("printer_printing", payload.State);
-        Assert.Equal("job123", payload.PrintJobId);
-        Assert.Equal(30, payload.WaitTimeInSeconds);
+        payload.State.ShouldBe("printer_printing");
+        payload.PrintJobId.ShouldBe("job123");
+        payload.WaitTimeInSeconds.ShouldBe(30);
     }
 
     [Fact]
@@ -430,7 +431,7 @@ public class PayloadTests
         {
             PaperStatus = 1
         };
-        Assert.Equal(1, payload.PaperStatus);
+        payload.PaperStatus.ShouldBe(1);
     }
 
     [Fact]
@@ -441,8 +442,8 @@ public class PayloadTests
             PaperStatus = 2
         };
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"printer_printing\"", json);
-        Assert.Contains("\"paper_state\":2", json);
+        json.ShouldContain("\"state\":\"printer_printing\"");
+        json.ShouldContain("\"paper_state\":2");
     }
 
     [Theory]
@@ -451,7 +452,7 @@ public class PayloadTests
     public void ScannerConnectionPayload_State_ShouldBeSettableAsRequired(string state)
     {
         var payload = new ScannerConnectionPayload { State = state };
-        Assert.Equal(state, payload.State);
+        payload.State.ShouldBe(state);
     }
 
     [Fact]
@@ -459,7 +460,7 @@ public class PayloadTests
     {
         var payload = new ScannerConnectionPayload { State = "scanner_ok" };
         var json = JsonSerializer.Serialize(payload);
-        Assert.Contains("\"state\":\"scanner_ok\"", json);
+        json.ShouldContain("\"state\":\"scanner_ok\"");
     }
 
     #endregion
@@ -469,29 +470,29 @@ public class PayloadTests
     [Fact]
     public void AllPayloads_ShouldImplementIMercureMessagePayload()
     {
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ReadyPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new BagClosing());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new BagRequiredPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new BarcodeDataInvalidPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new CancelDropPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new DebouncingPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new FinishedPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new FinishingPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new LogoutPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ScanLimitPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ServiceEnterPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ServiceExitPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new SessionExpiredPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new SignedInPayload());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new WaitForBag());
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new AwaitsDropPayload("ean"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ProductDetectionPayload("ean"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ProductNotAllowedPayload("ean"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new UnknownProductPayload("ean"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new InternetConnectivityPayload("online"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new PrinterPaperStatePayload("ok"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new PrinterStatusPayload("ready"));
-        Assert.IsAssignableFrom<IMercureMessagePayload>(new ScannerConnectionPayload { State = "scanner_ok" });
+        new ReadyPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new BagClosing().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new BagRequiredPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new BarcodeDataInvalidPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new CancelDropPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new DebouncingPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new FinishedPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new FinishingPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new LogoutPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ScanLimitPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ServiceEnterPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ServiceExitPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new SessionExpiredPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new SignedInPayload().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new WaitForBag().ShouldBeAssignableTo<IMercureMessagePayload>();
+        new AwaitsDropPayload("ean").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ProductDetectionPayload("ean").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ProductNotAllowedPayload("ean").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new UnknownProductPayload("ean").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new InternetConnectivityPayload("online").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new PrinterPaperStatePayload("ok").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new PrinterStatusPayload("ready").ShouldBeAssignableTo<IMercureMessagePayload>();
+        new ScannerConnectionPayload { State = "scanner_ok" }.ShouldBeAssignableTo<IMercureMessagePayload>();
     }
 
     #endregion

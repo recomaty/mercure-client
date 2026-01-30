@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using R3Polska.Sse.Mercure.Message;
 using RichardSzalay.MockHttp;
+using Shouldly;
 
 namespace R3Polska.Sse.Mercure.Tests;
 
@@ -39,7 +40,7 @@ public class MercureServiceTests
 
         var service = CreateService(httpClient);
 
-        Assert.Equal("http://localhost:3000", service.Host);
+        service.Host.ShouldBe("http://localhost:3000");
     }
 
     [Fact]
@@ -50,7 +51,7 @@ public class MercureServiceTests
 
         var service = CreateService(httpClient);
 
-        Assert.Equal("test-token", service.Token);
+        service.Token.ShouldBe("test-token");
     }
 
     [Fact]
@@ -67,8 +68,8 @@ public class MercureServiceTests
 
         var service = new MercureService(_loggerMock.Object, optionsWrapper, httpClient);
 
-        Assert.Equal("http://mercure:8080", service.Host);
-        Assert.Equal("different-token", service.Token);
+        service.Host.ShouldBe("http://mercure:8080");
+        service.Token.ShouldBe("different-token");
     }
 
     #endregion
@@ -156,8 +157,8 @@ public class MercureServiceTests
             Payload = new ReadyPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("topic=my-topic", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("topic=my-topic");
     }
 
     [Fact]
@@ -182,9 +183,9 @@ public class MercureServiceTests
             Payload = new ReadyPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("data=", capturedContent);
-        Assert.Contains("state", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("data=");
+        capturedContent.ShouldContain("state");
     }
 
     [Fact]
@@ -210,8 +211,8 @@ public class MercureServiceTests
             Payload = new ReadyPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("id=message-123", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("id=message-123");
     }
 
     [Fact]
@@ -236,8 +237,8 @@ public class MercureServiceTests
             Payload = new ReadyPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.DoesNotContain("id=", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldNotContain("id=");
     }
 
     [Fact]
@@ -343,8 +344,8 @@ public class MercureServiceTests
             Payload = new AwaitsDropPayload("1234567890123")
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("1234567890123", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("1234567890123");
     }
 
     [Fact]
@@ -369,8 +370,8 @@ public class MercureServiceTests
             Payload = new PrinterStatusPayload("printing", "job-123", 30)
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("printer_printing", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("printer_printing");
     }
 
     #endregion
@@ -395,8 +396,8 @@ public class MercureServiceTests
 
         await service.KillPublishersQueue();
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("initialization", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("initialization");
     }
 
     [Fact]
@@ -417,8 +418,8 @@ public class MercureServiceTests
 
         await service.KillPublishersQueue();
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("topic=scan", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("topic=scan");
     }
 
     [Fact]
@@ -439,8 +440,8 @@ public class MercureServiceTests
 
         await service.KillPublishersQueue();
 
-        Assert.NotNull(capturedContent);
-        Assert.DoesNotContain("id=", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldNotContain("id=");
     }
 
     #endregion
@@ -469,9 +470,9 @@ public class MercureServiceTests
             Payload = new FinishingPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("finishing", capturedContent);
-        Assert.Contains("message", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("finishing");
+        capturedContent.ShouldContain("message");
     }
 
     [Fact]
@@ -496,8 +497,8 @@ public class MercureServiceTests
             Payload = new InternetConnectivityPayload("online")
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("inet_connection_online", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("inet_connection_online");
     }
 
     [Fact]
@@ -522,8 +523,8 @@ public class MercureServiceTests
             Payload = new ScannerConnectionPayload { State = "scanner_ok" }
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("scanner_ok", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("scanner_ok");
     }
 
     #endregion
@@ -552,8 +553,8 @@ public class MercureServiceTests
             Payload = new ReadyPayload()
         });
 
-        Assert.NotNull(capturedContent);
-        Assert.Contains("topic=topic/with/slashes", capturedContent);
+        capturedContent.ShouldNotBeNull();
+        capturedContent.ShouldContain("topic=topic/with/slashes");
     }
 
     [Fact]

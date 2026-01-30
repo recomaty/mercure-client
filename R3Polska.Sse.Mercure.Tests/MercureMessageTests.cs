@@ -1,4 +1,5 @@
 using R3Polska.Sse.Mercure.Message;
+using Shouldly;
 
 namespace R3Polska.Sse.Mercure.Tests;
 
@@ -12,7 +13,7 @@ public class MercureMessageTests
             Topic = "test-topic",
             Payload = new ReadyPayload()
         };
-        Assert.Null(message.Id);
+        message.Id.ShouldBeNull();
     }
 
     [Fact]
@@ -24,7 +25,7 @@ public class MercureMessageTests
             Payload = new ReadyPayload(),
             Id = "message-123"
         };
-        Assert.Equal("message-123", message.Id);
+        message.Id.ShouldBe("message-123");
     }
 
     [Fact]
@@ -35,7 +36,7 @@ public class MercureMessageTests
             Topic = "scan",
             Payload = new ReadyPayload()
         };
-        Assert.Equal("scan", message.Topic);
+        message.Topic.ShouldBe("scan");
     }
 
     [Fact]
@@ -47,7 +48,7 @@ public class MercureMessageTests
             Payload = new ReadyPayload()
         };
         message.Topic = "changed-topic";
-        Assert.Equal("changed-topic", message.Topic);
+        message.Topic.ShouldBe("changed-topic");
     }
 
     [Fact]
@@ -59,7 +60,7 @@ public class MercureMessageTests
             Topic = "scan",
             Payload = payload
         };
-        Assert.Same(payload, message.Payload);
+        message.Payload.ShouldBeSameAs(payload);
     }
 
     [Fact]
@@ -80,7 +81,7 @@ public class MercureMessageTests
                 Topic = "scan",
                 Payload = payload
             };
-            Assert.Same(payload, message.Payload);
+            message.Payload.ShouldBeSameAs(payload);
         }
     }
 
@@ -95,9 +96,9 @@ public class MercureMessageTests
             Payload = payload
         };
 
-        Assert.Equal("unique-id-456", message.Id);
-        Assert.Equal("notifications", message.Topic);
-        Assert.Same(payload, message.Payload);
+        message.Id.ShouldBe("unique-id-456");
+        message.Topic.ShouldBe("notifications");
+        message.Payload.ShouldBeSameAs(payload);
     }
 
     [Theory]
@@ -112,7 +113,7 @@ public class MercureMessageTests
             Topic = topic,
             Payload = new ReadyPayload()
         };
-        Assert.Equal(topic, message.Topic);
+        message.Topic.ShouldBe(topic);
     }
 
     [Theory]
@@ -129,6 +130,6 @@ public class MercureMessageTests
             Payload = new ReadyPayload(),
             Id = id
         };
-        Assert.Equal(id, message.Id);
+        message.Id.ShouldBe(id);
     }
 }
